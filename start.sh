@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 if [ -f /starbound/linux/starbound_server ]; then
-  cd /starbound/linux
-  ./starbound_server
+  cd /starbound/discord
+  npm start
 fi
 
 while [ -f /.update ]; do

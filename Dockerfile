@@ -7,6 +7,8 @@ RUN locale-gen en_US.UTF-8
 ENV LANGUAGE en_US:en  
 ENV LANG en_US.UTF-8  
 
+ARG NODE_VERSION=18
+
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update && apt-get upgrade -y && apt-get dist-upgrade -y && apt-get autoremove -y
@@ -18,9 +20,13 @@ RUN apt-get install -y \
     lib32gcc1 \
     libstdc++6 \
     curl \
+    git \
     wget \
     bsdtar \
     build-essential
+
+RUN curl -sL https://deb.nodesource.com/setup_$NODE_VERSION.x | bash - && \
+    apt-get install -y nodejs
 
 USER root
 
@@ -33,6 +39,7 @@ RUN cd /steamcmd \
 	&& rm steamcmd_linux.tar.gz \
         && chmod +x ./steamcmd.sh
 
+RUN [[ -d "/starbound/discord" ]] || git clone https://github.com/MyristicaFragrans/CrossBound.git /starbound/discord
 
 ADD start.sh /start.sh
 

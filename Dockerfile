@@ -1,11 +1,6 @@
-FROM ubuntu:16.04
+FROM ubuntu:22.04
 
 MAINTAINER morgyn
-
-ENV LC_ALL en_US.UTF-8 
-RUN locale-gen en_US.UTF-8  
-ENV LANGUAGE en_US:en  
-ENV LANG en_US.UTF-8  
 
 ARG NODE_VERSION=18
 
@@ -16,13 +11,11 @@ RUN apt-get update && apt-get upgrade -y && apt-get dist-upgrade -y && apt-get a
 RUN apt-get install -y \
     ca-certificates \
     software-properties-common \
-    python-software-properties \
-    lib32gcc1 \
     libstdc++6 \
     curl \
     git \
     wget \
-    bsdtar \
+    libarchive-tools \
     build-essential
 
 RUN curl -sL https://deb.nodesource.com/setup_$NODE_VERSION.x | bash - && \
@@ -38,8 +31,6 @@ RUN cd /steamcmd \
 	&& tar zxvf steamcmd_linux.tar.gz \
 	&& rm steamcmd_linux.tar.gz \
         && chmod +x ./steamcmd.sh
-
-RUN [[ -d "/starbound/discord" ]] || git clone https://github.com/MyristicaFragrans/CrossBound.git /starbound/discord
 
 ADD start.sh /start.sh
 

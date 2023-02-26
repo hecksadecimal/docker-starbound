@@ -2,6 +2,7 @@
 
 if [ -f /starbound/linux/starbound_server ]; then
   cd /starbound/discord
+  npm install
   npm start
 fi
 

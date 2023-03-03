@@ -1,25 +1,10 @@
-FROM ubuntu:22.04
+FROM node:18
 
 MAINTAINER morgyn
 
 ARG NODE_VERSION=18
 
 ENV DEBIAN_FRONTEND noninteractive
-
-RUN apt-get update && apt-get upgrade -y && apt-get dist-upgrade -y && apt-get autoremove -y
-
-RUN apt-get install -y \
-    ca-certificates \
-    software-properties-common \
-    libstdc++6 \
-    curl \
-    git \
-    wget \
-    libarchive-tools \
-    build-essential
-
-RUN curl -sL https://deb.nodesource.com/setup_$NODE_VERSION.x | bash - && \
-    apt-get install -y nodejs
 
 USER root
 
